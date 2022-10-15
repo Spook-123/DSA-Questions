@@ -1,0 +1,27 @@
+class Solution {
+public:
+    bool isSafe(int n) {
+        int num = n;
+        while(num != 0) {
+            int ld = num%10;
+            // Check if last digit is zero or it is divisible by number 
+            if(ld == 0 || n%ld != 0) {
+                return false;
+            }
+            num = num/10;
+        }
+        return true;
+    }
+    vector<int> selfDividingNumbers(int left, int right) {
+        
+        vector<int> ans;
+        for(int i=left;i<=right;i++) {
+            
+            if(isSafe(i)) {
+                ans.push_back(i);
+            }
+        }
+        return ans;
+        
+    }
+};
