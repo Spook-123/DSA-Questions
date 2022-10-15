@@ -1,0 +1,32 @@
+class Solution{
+    public:
+    vector<int> twoOddNum(int Arr[], int N)  
+    {
+        vector<int> ans;
+        int XOR = 0;
+        int res1 = 0;
+        int res2 = 0;
+        for(int i=0;i<N;i++) {
+            XOR = XOR^Arr[i];
+        }
+        int sb = (XOR&~(XOR-1)); // Finds the rightmost bit;
+        // Grouping according to set bit so that two number goes in different groups
+        for(int i=0;i<N;i++) {
+            if(Arr[i]&sb) {
+                res1 = res1^Arr[i];
+            }
+            else {
+                res2 = res2^Arr[i];
+            }
+        }
+        if(res1 > res2) {
+            ans.push_back(res1);
+            ans.push_back(res2);
+        }
+        else {
+            ans.push_back(res2);
+            ans.push_back(res1);
+        }
+        return ans;
+    }
+};
