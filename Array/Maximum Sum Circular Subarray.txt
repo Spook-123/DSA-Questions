@@ -1,0 +1,47 @@
+class Solution {
+public:
+    int maximumSubarray(vector<int> nums,int n) {
+        
+        int res = nums[0];
+        int maxEnd = nums[0];
+        for(int i=1;i<n;i++) {
+            
+            maxEnd = max(maxEnd+nums[i],nums[i]);
+            res = max(maxEnd,res);
+        }
+        return res;
+    }
+    int minimumSubrray(vector<int> nums,int n) {
+        int res = nums[0];
+        int minEnd = nums[0];
+        for(int i=1;i<n;i++) {
+            
+            minEnd = min(minEnd+nums[i],nums[i]);
+            res = min(minEnd,res);
+        }
+        return res;
+    }
+    int maxSubarraySumCircular(vector<int>& nums) {
+        
+        int n = nums.size();
+        // Calculate Maximum Subarray Sum
+        int max_normal = maximumSubarray(nums,n);
+        // If max_normal is less than zero then it means , Calculate sum is Maximum
+        if(max_normal < 0) {
+            return max_normal;
+        }
+        // Compute sum of all elements of array
+        int arr_sum = 0;
+        for(int i=0;i<n;i++) {
+            arr_sum += nums[i];
+        }
+        // Compute Minimum Subarray Sum 
+        int minSum = minimumSubrray(nums,n);
+        // Substract minSum from whole array sum to get the  "Maximum Circular Sum only"
+        int max_circular = arr_sum-minSum;
+        // Return the max of noraml Subarray sum and circular subarray sum
+        return max(max_normal,max_circular);
+        
+        
+    }
+};
