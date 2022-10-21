@@ -1,0 +1,19 @@
+class Solution {
+public:
+    vector<int> findDuplicates(vector<int>& nums) {
+        
+        int n = nums.size();
+        vector<int> ans;
+        for(int i=0;i<n;i++) {
+            // Using Value as Index
+            int index = abs(nums[i])-1;
+            if(nums[index] < 0) {
+                // Duplicate Value is index+1 as it accessed the same element twice 
+                ans.push_back(index+1);
+            }
+            nums[index] = -nums[index];
+        }
+        return ans;
+        
+    }
+};
