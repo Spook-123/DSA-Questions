@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int longestConsecutive(vector<int>& nums) {
+        
+        int n = nums.size();
+        unordered_set<int> s;
+        // Insert all the numbers in set
+        for(int x:nums) {
+            s.insert(x);
+        }
+        // Check if current Element -1 exist is the set if not then it the starting number so count till longest sequence
+        int longest = 0;
+        for(int i:nums) {
+            if(s.find(i-1) == s.end()) {
+                int currStreak = 1;
+                int currNum = i;
+                while(s.find(currNum+1) != s.end()) {
+                    currStreak++;
+                    currNum+=1;
+                }
+                longest = max(longest,currStreak);
+            }
+            
+        }
+        return longest;  
+    }
+};
