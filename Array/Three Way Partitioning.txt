@@ -1,0 +1,29 @@
+class Solution{   
+public:
+    //Function to partition the array around the range such 
+    //that array is divided into three parts.
+    void threeWayPartition(vector<int>& arr,int a, int b)
+    {
+        int left = 0;
+        int right = arr.size()-1;
+        int i = 0;
+        while(i <= right) {
+            
+            // Accumulate element at first if they are less than "a"
+            if(arr[i] < a) {
+                swap(arr[i],arr[left]);
+                i++;
+                left++;
+            }
+            // Accumulate element at last if they are greater than "b"
+            else if(arr[i] > b) {
+                swap(arr[i],arr[right]);
+                right--;
+            }
+            // Accumulate element in middle  if they are in range a,b
+            else {
+                i++;
+            }
+        }
+    }
+};
