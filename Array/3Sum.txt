@@ -1,0 +1,43 @@
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        
+        int n = nums.size();
+        vector<vector<int>> ans;
+        sort(nums.begin(),nums.end());
+        for(int i=0;i<n;i++) {
+            // Avoid the Duplicates
+            if(i > 0 && nums[i] == nums[i-1]) {
+                continue;
+            }
+            // Start the search,Similar to 2Sum Problem
+            int left = i+1;
+            int right = n-1;
+            while(left < right) {
+                int threeSum = nums[i] + nums[left] + nums[right];
+                if(threeSum > 0) {
+                    right--;
+                }
+                else if(threeSum < 0) {
+                    left++;
+                }
+                else {
+                    // Insert All 3 Pairs in vector
+                    vector<int> temp;
+                    temp.push_back(nums[i]);
+                    temp.push_back(nums[left]);
+                    temp.push_back(nums[right]);
+                    // Insert it in 2d vector
+                    ans.push_back(temp);
+                    // Again Avoid the Duplicates
+                    left++;
+                    while(nums[left-1] == nums[left] && left < right) {
+                        left++;
+                    }
+                }
+            }
+        }
+        return ans;
+        
+    }
+};
