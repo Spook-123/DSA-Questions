@@ -1,0 +1,33 @@
+class Solution {
+public:
+    int minSubArrayLen(int target, vector<int>& nums) {
+        
+        int n = nums.size();
+        int minLen = INT_MAX;
+        int currSum = 0;
+        int left = 0;
+        int right = 0;
+        // Traverse the array til right pointer is less than size of array
+        while(right < n) {
+            // Add to CurrSum till currSum is less than target
+            while(currSum < target && right < n) {
+                currSum += nums[right];
+                right++;
+            }
+            // Find the minLen and decrease the CurrSum with left Pointer
+            while(currSum >= target && left < n) {
+                if(right-left < minLen) {
+                    minLen = right-left;
+                }
+                currSum -= nums[left];
+                left++;
+            }            
+        }
+        // Min Len Not Found
+        if(minLen == INT_MAX) {
+            return 0;
+        }
+        return minLen;
+        
+    }
+};
