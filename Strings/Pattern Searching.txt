@@ -1,0 +1,25 @@
+class Solution{
+public:	
+	
+	int search(string text, string pat)
+	{
+	    int n1 = text.length();
+	    int n2 = pat.length();
+	    
+	    // Run the loop n1-n2 times for sliding effect
+	    for(int i=0;i<=(n1-n2);i++) {
+	        int j;
+		  // Check every character of Pattern with given text
+	        for(j=0;j<n2;j++) {
+	            if(pat[j] != text[i+j]) {
+	                break;
+	            }
+	        }
+		  // if all characters of pattern matches then it should be equal to length of pattern
+	        if(j == n2) {
+	            return true;
+	        }
+	    }
+	    return false;
+	}
+};
