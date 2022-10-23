@@ -1,0 +1,18 @@
+class Solution {
+public:
+    bool rotateString(string s, string goal) {
+        
+        
+        if(s.length() != goal.length()) {
+            return false;
+        }
+        // Concatenate Goal with Goal so that 's' string can be searched in goal 
+        if((goal+goal).find(s) != string::npos) {
+            return true;
+        }
+        else {
+            return false;
+        }
+        
+    }
+};

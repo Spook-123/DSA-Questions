@@ -1,0 +1,30 @@
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        
+        // Total ASCII Values 256
+        const int CHAR = 256;
+        int n1 = s.length();
+        int n2 = t.length();
+        // length is not equal then return false
+        if(n1 != n2) {
+            return false;
+        }
+        // 256 size long array to store the count of every character
+        vector<char> count(CHAR,0);
+        // string 1 increase the count , string 2 decrease the count 
+        for(int i=0;i<n1;i++) {
+            count[s[i]]++;
+            count[t[i]]--;
+        }
+        // if 's' is anagram of 't' then count array must contains all zeros,continues .. down..
+        for(int i=0;i<256;i++) {
+            // if not then extra character is present
+            if(count[i] != 0) {
+                return false;
+            }
+        }
+        return true;
+        
+    }
+};
