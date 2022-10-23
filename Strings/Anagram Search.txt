@@ -25,18 +25,22 @@ int main()
     vector<int> countText(256,0);
     vector<int> countPat(256,0);
     
+    // Counting the Frequencies of text and pattern
     for(int i=0;i<pat.length();i++) {
         countText[txt[i]]++;
         countPat[pat[i]]++;
     }
     
+    // Sliding the pattern over the text to find the anagram
     for(int i=pat.length();i<txt.length();i++) {
-        
+        // Check if Frequency of both countText and countPattern is same 
         if(areSame(countText,countPat)) {
             cout<<"Anagram Found!!"<<endl;
             return 0;
         }
+        // Include new Window 
         countText[txt[i]]++;
+        // Reduce the count of previous Window
         countText[txt[i-pat.length()]]--;
     }
     cout<<"No Anagram"<<endl;
