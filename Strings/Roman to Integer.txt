@@ -1,0 +1,30 @@
+class Solution {
+public:
+    int romanToInt(string s) {
+        
+        unordered_map<char,int> roman;
+        // Store the Mapping
+        roman.insert({'I',1});
+        roman.insert({'V',5});
+        roman.insert({'X',10});
+        roman.insert({'L',50});
+        roman.insert({'C',100});
+        roman.insert({'D',500});
+        roman.insert({'M',1000});
+        
+        int n = s.length();
+        int res = 0;
+        for(int i=0;i<n;i++) {
+            // If current Character is smaller than next character then,substract the current character from result
+            if(i+1 < n && roman[s[i]] < roman[s[i+1]]) {
+                res -= roman[s[i]];
+            }
+            // else add into result
+            else {
+                res += roman[s[i]];
+            }
+        }
+        return res;
+        
+    }
+};

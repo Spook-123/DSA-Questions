@@ -1,0 +1,34 @@
+class Solution {
+public:
+    string longestCommonPrefix(vector<string>& s) {
+        
+        
+        string ans = "";
+        // Length of the first string
+        int n = s[0].length();
+        
+        for(int i=0;i<n;i++) {
+            // Store the first string
+            char ch = s[0][i];
+            bool match = true;
+            // Iterate through next strings
+            for(int j=1;j<s.size();j++) {
+                // if length of next string becomes greater or character does not matches then match is false 
+                if(s[j].length() < i || ch != s[j][i]) {
+                    match = false;
+                    break;
+                }
+            }
+            if(match == false) {
+                break;
+            }
+            // Else insert the elements into ans string
+            else {
+                ans.push_back(ch);
+            }
+            
+        }
+        return ans;
+        
+    }
+};
