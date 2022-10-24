@@ -1,0 +1,42 @@
+class Solution {
+public:
+    const int CHAR = 256;
+    bool areSame(vector<int>& ct,vector<int>& cp) {
+        
+        for(int i=0;i<CHAR;i++) {
+            if(ct[i] != cp[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+    vector<int> findAnagrams(string s, string p) {
+        
+        
+        vector<int> ans;
+        vector<int> ct(CHAR,0);
+        vector<int> cp(CHAR,0);
+        int n1 = s.length();
+        int n2 = p.length();
+        // Pattern's length is greater then return ans immediately
+        if(n2 > n1) {
+            return ans;
+        }
+        // Run through first window and increment the frequencies
+        for(int i=0;i<n2;i++) {
+            ct[s[i]]++;
+            cp[p[i]]++;
+        }
+        // Increase and Decrease freqencies move forward in window and compute the starting index
+        for(int i=n2;i<=n1;i++) {
+            // Check for anagram
+            if(areSame(ct,cp)) {
+                ans.push_back(i-n2);
+            }
+            ct[s[i]]++;
+            ct[s[i-n2]]--;
+        }
+        return ans;
+        
+    }
+};
