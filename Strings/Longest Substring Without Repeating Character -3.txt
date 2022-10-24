@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        
+        int res = 0; // Max Length
+        int n = s.length();
+        int i = 0; // Starting Index
+        vector<int> prevIndex(256,-1); // Keeping track of previous Unique character's index
+        for(int j=0;j<n;j++) {
+            // Compute the starting index
+            i = max(i,prevIndex[s[j]]+1);
+            // Compute the length 
+            int maxEnd = j-i+1;
+            res = max(maxEnd,res);
+            // Mark the prevIndex;
+            prevIndex[s[j]] = j;
+        }
+        return res;
+        
+    }
+};
+
+TC -> O(n);
+SC -> O(256);

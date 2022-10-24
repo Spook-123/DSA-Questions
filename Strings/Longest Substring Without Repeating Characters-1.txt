@@ -1,0 +1,33 @@
+class Solution {
+public:
+    bool areDistinct(string s,int i,int j) {
+        
+        vector<bool> vis(256,false);
+        for(int k=i;k<=j;k++) {
+            if(vis[s[k]]) {
+                return false;
+            }
+            vis[s[k]] = true;
+        }
+        return true;
+    }
+    int lengthOfLongestSubstring(string s) {
+        
+        int res = 0;
+        // Generate all Permutations 
+        for(int i=0;i<s.length();i++) {
+            for(int j=i;j<s.length();j++) {
+                // Check the Window if it is having distinct character
+                if(areDistinct(s,i,j)) {
+                    // Compute the length 
+                    res = max(res,j-i+1);
+                }
+            }
+        }
+        return res;
+        
+    }
+};
+
+TC -> (N^3) it will throw TLE
+SC -> O(256)

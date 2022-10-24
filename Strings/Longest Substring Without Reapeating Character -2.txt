@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        
+        int res = 0;
+        // Generate all Permutations 
+        for(int i=0;i<s.length();i++) {
+            // For Every Different Substring,we maintain visited vector
+            vector<bool> vis(256,false);
+            for(int j=i;j<s.length();j++) {
+                // If Character repeats then break and start from different substring
+                if(vis[s[j]]) {
+                    break;
+                }
+                // Mark every character visited and compute the length 
+                else {
+                    res = max(res,j-i+1);
+                    vis[s[j]] = true;
+                }
+            }
+        }
+        return res;
+        
+    }
+};
+
+
+TC -> O(N^2)
+Sc -> O(Generated Substring's max length)
