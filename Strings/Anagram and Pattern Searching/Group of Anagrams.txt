@@ -1,0 +1,23 @@
+class Solution {
+public:
+    vector<vector<string>> groupAnagrams(vector<string>& s) {
+        
+        
+        vector<vector<string>> ans;
+        // Map sorted string to original string
+        unordered_map<string,vector<string>> m; // lexically sort string,anagram of string
+        
+        // Traverse through every string and map it
+        for(auto x:s) {
+            string temp = x;
+            sort(x.begin(),x.end());
+            m[x].push_back(temp);
+        }
+        // Get the mapping and put it in 2d vector
+        for(auto x:m) {
+            ans.push_back(x.second);
+        }
+        return ans;
+        
+    }
+};
