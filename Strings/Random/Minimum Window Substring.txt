@@ -1,0 +1,59 @@
+class Solution {
+public:
+    string minWindow(string s, string t) {
+        
+        if(t == "") {
+            return "";
+        }
+        
+        unordered_map<char,int> countT; // Character,count
+        unordered_map<char,int> window; // Character,count
+        
+        for(int i=0;i<t.length();i++) {
+            countT[s[i]]++;
+        }
+        int have = 0;
+        int need = countT.size();
+        int start = -1;
+        int end = -1;
+        int resLen = INT_MAX;
+        int left = 0;
+        pair<int,int> p;
+        for(int i=0;i<s.length();i++) {
+            char ch = s[i];
+            window[ch]++;
+            
+            if((countT.find(ch) != countT.end()) && (window[ch] == countT[ch])) {
+                have++; 
+            }
+            while(have == need) {
+                    // Update the result
+                    if(i-left+1 < resLen) {
+                        start = left;
+                        end = i;
+                        resLen = i-left+1;
+                    }  
+                    // Pop from left of our window
+                    window[s[left]]--;
+                    if((countT.find(s[left]) != countT.end()) && (window[s[left]] < countT[s[left]])) {
+                        have--;
+                    }
+                    left++;
+                }
+        }
+        
+
+        
+        if(resLen == INT_MAX) {
+            return "";
+        }
+        cout<<"Length -> "<<resLen<<endl;
+        //string(s.c_str() + start, s.c_str() + end + 1);
+        return s.substr(start,resLen);
+        
+        
+        
+        
+        
+    }
+};
