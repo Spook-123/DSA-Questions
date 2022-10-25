@@ -1,0 +1,26 @@
+class Solution
+{
+  public:
+    string secFrequent (string arr[], int n)
+    {
+        string ans;
+        int maxFreq = -1;
+        unordered_map<string,int> mapping;// unique string, string count
+        // Create mapping and keep track of max occuring string
+        for(int i=0;i<n;i++) {
+            mapping[arr[i]]++;
+            maxFreq = max(maxFreq,mapping[arr[i]]);
+        }
+        // Comparing with max count maintain second max 
+        int secondMaxFreq = -1;
+        for(auto it:mapping) {
+            if(it.second < maxFreq) {
+                if(it.second > secondMaxFreq) {
+                    secondMaxFreq = it.second;
+                    ans = it.first;
+                }
+            }
+        }
+        return ans;
+    }
+};
