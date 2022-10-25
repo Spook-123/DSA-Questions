@@ -1,0 +1,24 @@
+int minFlips (string S)
+{
+    
+    
+    int n = S.length();
+    int flips = 0;
+    for(int i=0;i<n;i++) {
+        // Even index character must have be '1' if not then flip it 
+        if(i%2 == 0) {
+            if(S[i] == '0') {
+                flips++;
+            }
+        }
+        // Odd index character must have be '0' if not then flip it
+        if(i%2 != 0) {
+            if(S[i] == '1') {
+                flips++;
+            }
+        }
+    }
+    // Compare it with (length - flips) , so to get reset flips possible for string 
+    return min(flips,n-flips);
+    
+}
