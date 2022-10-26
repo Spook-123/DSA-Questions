@@ -1,0 +1,41 @@
+class Solution {
+public:
+    void solve(string digits,string output,int index,vector<string>& ans,string mapping[]) {
+        
+        // If index goes out of bound then push the string into ans
+        if(index >= digits.length()) {
+            ans.push_back(output);
+            return ;
+        }
+        
+        // Get the Number
+        int number = digits[index]-'0';
+        //Get the mapping
+        string value = mapping[number];
+        
+        // Generate the substrings and create the output string with moving index and recursion call 
+        for(int i=0;i<value.length();i++) {
+            
+            output.push_back(value[i]);
+            solve(digits,output,index+1,ans,mapping);
+            // Remove the included character for backtracking
+            output.pop_back();
+        }
+    }
+    vector<string> letterCombinations(string digits) {
+        
+        
+        vector<string> ans;
+        // Create the output string 
+        string output = "";
+        if(digits.length() == 0) {
+            return ans;
+        }
+        // Create the mapping of numbers from 2 to 9 with characters 
+        int index = 0;
+        string mapping[10] = {"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+        solve(digits,output,index,ans,mapping);
+        return ans;
+        
+    }
+};
