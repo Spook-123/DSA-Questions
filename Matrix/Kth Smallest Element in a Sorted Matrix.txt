@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int kthSmallest(vector<vector<int>>& matrix, int k) {
+        
+        int row = matrix.size();
+        int col = matrix[0].size();
+        
+        // Create Max Heap for samllest element
+        priority_queue<int> pq;
+        
+        for(int i=0;i<row;i++) {
+            for(int j=0;j<col;j++) { 
+                // Push elements and check if size of heap is less than k , if not then pop the element
+                pq.push(matrix[i][j]);
+                if(pq.size() > k) {
+                    pq.pop();
+                }
+            }
+        }
+        // At last smallest kth element would be at the top of heap so return it
+        return pq.top();
+        
+    }
+};
