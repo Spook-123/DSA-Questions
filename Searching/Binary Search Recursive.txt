@@ -1,0 +1,38 @@
+class Solution {
+public:
+    int solve(vector<int>& nums,int target,int start,int end) {
+        
+        // if start crosses the end pointer then element does not exists
+        if(start > end) {
+            return -1;
+        }
+        // Compute middle index of array 
+        int mid = start + (end-start)/2;
+        
+        // if found then return middle index
+        if(nums[mid] == target) {
+            return mid;
+        }
+        // search for the element in right half of the array (reduce the search space)
+        if(target > nums[mid]) {
+            return solve(nums,target,mid+1,end);
+        }
+        // search for the element in left half of the array (reduce the search space)
+        else {
+            return solve(nums,target,start,mid-1);
+        }
+        
+        
+    }
+    int search(vector<int>& nums, int target) {
+        
+        // Set start and end of array
+        int start = 0;
+        int end = nums.size()-1;
+        // Get the index of element
+        int index = solve(nums,target,start,end);
+        
+        return index;
+        
+    }
+};

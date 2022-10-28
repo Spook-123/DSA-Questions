@@ -1,0 +1,30 @@
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        
+        
+        // Set the pointers "start" and "end" 
+        int start = 0;
+        int end = nums.size()-1;
+        
+        while(start <= end) {
+            // Compute the middile index 
+            int mid = start + (end-start)/2;
+            // if element is found then return it's index
+            if(nums[mid] == target) {
+                return mid;
+            }
+            // if target is greater than middle element then reduce the search space by shifting start pointer 
+            else if(target > nums[mid]) {
+                start = mid+1;
+            }
+            // if target is less than middle element then reduce the search space by shifting end pointer 
+            else if(target < nums[mid]) {
+                end = mid-1;
+            }
+            
+        }
+        return -1;   
+        
+    }
+};
