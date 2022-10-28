@@ -1,0 +1,69 @@
+class Solution {
+public:
+    int firstIndexRecursive(vector<int>& nums,int start,int end,int target) {
+        
+        if(start > end) {
+            return -1;
+        }
+        
+        int mid = start + (end-start)/2;
+        
+        if(target > nums[mid]) {
+            return firstIndexRecursive(nums,mid+1,end,target);
+        }
+        else if(target < nums[mid]) {
+            return firstIndexRecursive(nums,start,mid-1,target);
+        }
+        else {
+            // Check the edge cases
+            if(mid == 0 || nums[mid-1] != nums[mid]) {
+                return mid;
+            }
+            else {
+                return firstIndexRecursive(nums,start,mid-1,target);
+            }
+        }
+        
+        
+    }
+    int lastIndexRecursive(vector<int>& nums,int start,int end,int target) {
+        
+        if(start > end) {
+            return -1;
+        }
+        
+        int mid = start + (end-start)/2;
+        
+        if(target > nums[mid]) {
+            return lastIndexRecursive(nums,mid+1,end,target);
+        }
+        else if(target < nums[mid]) {
+            return lastIndexRecursive(nums,start,mid-1,target);
+        }
+        else {
+            // Check the edge cases
+            if(mid == nums.size()-1 || nums[mid] != nums[mid+1]) {
+                return mid;
+            }
+            else {
+                return lastIndexRecursive(nums,mid+1,end,target);
+            }
+        }
+        
+        
+    }
+    vector<int> searchRange(vector<int>& nums, int target) {
+        
+        vector<int> ans;
+        int indexFirst = firstIndexRecursive(nums,0,nums.size()-1,target);
+        int indexLast = lastIndexRecursive(nums,0,nums.size()-1,target);
+        
+        ans.push_back(indexFirst);
+        ans.push_back(indexLast);
+        
+        return ans;
+        
+        
+        
+    }
+};
