@@ -1,0 +1,36 @@
+class Solution {
+public:
+    int mySqrt(int x) {
+        
+        // Set the range of squares
+        int low = 1;
+        int high = x;
+        int ans = 0;
+        // Run the loop till the given number "x"
+        while(low <= high) {
+            
+            // Compute the middle element in range
+            long long mid = low + (high-low)/2;
+            // Compute it's Square
+            long long midSquare = mid*mid;
+            
+            // Check if it is equal to given number "x"
+            if(midSquare == x) {
+                return mid;
+            }
+            // if midSquare is greater than given value then reduce the search space
+            else if(midSquare > x) {
+                
+                high = mid-1;
+            }
+            // if midSquare is less than given value then reduce the search space and store the least possibe answer
+            else {
+                low = mid+1;
+                ans = mid;
+            }
+        }
+        
+        return ans;
+        
+    }
+};
