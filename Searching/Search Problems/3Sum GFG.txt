@@ -1,0 +1,38 @@
+class Solution{
+    public:
+    //Function to find if there exists a triplet in the 
+    //array A[] which sums up to X.
+    bool isPair(int A[],int n,int X,int start) {
+        
+        int i = start;
+        int j = n-1;
+        
+        while(i < j) {
+            
+            if(A[i] + A[j] == X) {
+                return true;
+            }
+            else if(A[i] + A[j] > X) {
+                j--;
+            }
+            else {
+                i++;
+            }
+        }
+        return false;
+    }
+    bool find3Numbers(int A[], int n, int X)
+    {
+        // Sort the array
+        sort(A,A+n);
+        // Run the loop until the third last element
+        for(int i=0;i<n-2;i++) {
+            // Check the pair exists by fixing the first element and running 2Sum on other two  
+            if(isPair(A,n,X-A[i],i+1)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+};
