@@ -1,0 +1,30 @@
+class Solution {
+public:
+    int findPeakElement(vector<int>& nums) {
+        
+        // Set the pointers 
+        int start = 0;
+        int end = nums.size()-1;
+        int n = nums.size();
+        
+        while(start <= end) {
+            
+            // Compute the middle element
+            int mid = start + (end-start)/2;
+            // Check for peak condition
+            if((mid == 0 || nums[mid] >= nums[mid-1]) && (mid == n-1 || nums[mid] >= nums[mid+1])) {
+                return mid;
+            }
+            // Shift the search space to the left
+            else if(mid > 0 && nums[mid-1] >= nums[mid]) {
+                end = mid-1;
+            }
+            // Shift the search space to the right
+            else {
+                start = mid+1;
+            }
+        }
+        return -1;
+        
+    }
+};
