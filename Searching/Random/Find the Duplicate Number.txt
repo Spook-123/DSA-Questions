@@ -1,0 +1,28 @@
+class Solution {
+public:
+    int findDuplicate(vector<int>& nums) {
+        
+        // Consider elements of array as indexes and form a chain 
+        // Start two pointers from Starting
+        int slow = nums[0];
+        int fast = nums[0];
+        
+        // Move slow pointer one link ahead and fast pointer two links ahead
+        do {
+            slow = nums[slow];
+            fast = nums[nums[fast]];
+            
+        }while(slow != fast);
+        
+        // Set slow pointer at start and move slow and fast pointer at same link 
+        slow = nums[0];
+        // one move for both of the pointer would make them meet at repeated element
+        while(slow != fast) {
+            
+            slow = nums[slow];
+            fast = nums[fast];
+        }
+        return slow;
+        
+    }
+};
