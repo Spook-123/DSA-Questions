@@ -1,0 +1,45 @@
+class Solution {
+public:
+    static bool comp(pair<int,string>& a,pair<int,string>& b) {
+        
+        // According to frequency of strings
+        if(a.first != b.first) {
+            return a.first > b.first;
+        }
+        // Lexicographical order 
+        else {
+            return a.second < b.second;
+        }
+        
+    }
+    vector<string> topKFrequent(vector<string>& words, int k) {
+        
+        
+        map<string,int> map; // string,count
+        int n = words.size();
+        // Count the string Frequencies
+        for(int i=0;i<n;i++) {
+            map[words[i]]++;
+        }
+        // Insert all map element into vector of pair to sort them according to given condition 
+        vector<pair<int,string>> pq; // count,string
+        for(auto it:map) {
+            pq.push_back({it.second,it.first});
+        }
+        // Sort using custom comparator
+        sort(pq.begin(),pq.end(),comp);
+        // Fill the ans with "k" most frequent strings only
+        vector<string> ans;
+        for(auto it:pq) {
+            
+            if(k > 0) {
+                ans.push_back(it.second);
+                k--;
+            }
+            else {
+                break;
+            }
+        }
+        return ans;
+    }
+};
