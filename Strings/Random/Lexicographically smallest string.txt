@@ -1,0 +1,66 @@
+class Solution {
+  public:
+    bool isPower(int num) {
+        int count = 0;
+        while(num > 0) {
+            if(num&1) {
+                count++;
+            }
+            num = num>>1;
+        }
+        if(count == 1) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    string lexicographicallySmallest(string S, int k) {
+        
+        int len = S.length();
+        // Check the power of 2 and correct the value of "k"
+        if(isPower(len)) {
+            k = k/2;
+        }
+        else {
+            k *= 2;
+        }
+        // Edge Case
+        if(k >= len) {
+            return "-1";
+        }
+        // Create a stack and insert element one by one 
+        stack<char> st;
+        // remove count
+        int removed = 0;
+        for(int i=0;i<len;i++) {
+            // Extract the characters
+            char ch = S[i];
+            // Check for "Lexicographically smallest string" 
+            while(!st.empty() && removed < k && st.top() > ch) {
+                st.pop();
+                removed++;
+            }
+            // Push the elements on stack
+            st.push(ch);
+        }
+        // If "Lexicographically smallest string" is already present then removed it's "k" characters
+        string ans = "";
+        while(removed < k) {
+            st.pop();
+            removed++;
+        }
+        // Append those into answer string
+        while(!st.empty()) {
+            char ch = st.top();
+            st.pop();
+            ans.push_back(ch);
+        }
+        // reverse the string becauses stack is used
+        reverse(ans.begin(),ans.end());
+        
+        return ans;
+        
+        
+    }
+};
