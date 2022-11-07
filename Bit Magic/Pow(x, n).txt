@@ -1,0 +1,30 @@
+class Solution {
+public:
+    double myPow(double x, int n) {
+        
+        double res = 1;
+        // Take power as "long long" as integer range would exceed when converted (-) -> (+)
+        // Use long long 
+        long long power = abs(n);
+        
+        // Run the loop till the power given
+        while(power > 0) {
+            // Odd power appears then (*) "x" with computed result and reduce the power by 1
+            if(power&1) {
+                res = res*x;
+                power--;
+            }
+            // Even power appears then (*) "x" with x itself and reduce the power by half
+            else {
+                x = x*x;
+                power = power/2;
+            }
+        }
+        // (-) Power -> divide the result 
+        if(n < 0) {
+            res = 1/res;
+        }
+        return res;
+        
+    }
+};
