@@ -1,0 +1,35 @@
+class Solution {
+public:
+    bool detectCapitalUse(string word) {
+        
+        // Define Some Variables to keep track of Alphabets
+        int n = word.length();
+        int lenCount = 0;
+        int first = 0;
+        int capital = 0;
+        int cursive = 0;
+        
+        // Trace through characters and count the captial and cursive letters as per given condition
+        for(int i=0;i<n;i++) {
+            int ch = word[i];
+            if(i == 0 && ch >= 65  && ch <= 90) {
+                first++;
+                capital++;
+            }
+            else if(ch >= 65  && ch <= 90) {
+                capital++;
+            }
+            else if(ch >= 97 && ch <= 122) {
+                cursive++;
+            }
+        }
+        // Check for valid string
+        if((capital == n) || (cursive == n) || (first == 1 && cursive == n-1)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+        
+    }
+};
