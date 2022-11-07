@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int findKthLargest(vector<int>& nums, int k) {
+        
+        int n = nums.size();
+        // Create a Max heap 
+        priority_queue<int,vector<int>,greater<int>> pq;
+        // Iterate through array and push it into priority queue till the size becomes ">" than "k" 
+        for(int it:nums) {
+            pq.push(it);
+            // Pop the elements when size becomes ">" than "k" 
+            if(pq.size() > k) {
+                pq.pop();
+            }
+        }
+        return pq.top();
+        
+    }
+};
