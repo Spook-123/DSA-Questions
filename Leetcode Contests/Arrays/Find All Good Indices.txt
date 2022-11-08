@@ -1,0 +1,49 @@
+class Solution {
+public:
+    vector<int> goodIndices(vector<int>& nums, int k) {
+        
+        int n = nums.size();
+        // Create the increasing and decreasing arrays 
+        vector<int> decreasingOrder(n);
+        vector<int> increasingOrder(n);
+        // Mark the first index of decreasing array as "1"
+        decreasingOrder[0] = 1;
+        // Mark the last index of increasing array as "1"
+        increasingOrder[n-1] = 1;
+        
+        for(int i=1;i<n;i++) {
+            // Increase the count by previous element if elements are decreasing
+            if(nums[i-1] >= nums[i]) {
+                decreasingOrder[i] = 1 + decreasingOrder[i-1];
+            }
+            // Reset the count
+            else {
+                decreasingOrder[i] = 1;
+            }
+        }
+        
+        // Start from last index 
+        for(int i=n-2;i>=0;i--) {
+            // Increase the count by previous element if elements are increasing
+            if(nums[i] <= nums[i+1]) {
+                increasingOrder[i] = 1 + increasingOrder[i+1];
+            }
+            // Reset the count
+            else {
+                increasingOrder[i] = 1;
+            }
+        }
+        
+        vector<int> ans;
+        // Traverse the array leaving "k" elements on either sides
+        for(int i=k;i<n-k;i++) {
+            
+            // if index is good then push it into answer
+            if(decreasingOrder[i-1] >= k && increasingOrder[i+1] >= k) {
+                ans.push_back(i);
+            }
+        }
+        return ans;
+        
+    }
+};
