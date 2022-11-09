@@ -1,0 +1,45 @@
+class Solution {
+public:
+    void convertRowCol(vector<vector<int>>& matrix,int i,int j,int row,int col) {
+        
+        // Row Conversion
+        for(int k=0;k<col;k++) {
+            if(matrix[i][k] != 0) {
+                matrix[i][k] = -1;
+            }
+        }
+        // Column Conversion
+        for(int k=0;k<row;k++) {
+            if(matrix[k][j] != 0) {
+                matrix[k][j] = -1;
+            }
+        }
+        
+        
+    }
+    void setZeroes(vector<vector<int>>& matrix) {
+        
+        
+        int row = matrix.size();
+        int col = matrix[0].size();
+        bool flag = false;
+        for(int i=0;i<row;i++) {
+            for(int j=0;j<col;j++) {
+                if(matrix[i][j] == 0) {
+                    flag = true;
+                    convertRowCol(matrix,i,j,row,col);    
+                }
+                
+            }
+        }
+        
+        for(int i=0;i<row;i++) {
+            for(int j=0;j<col;j++) {
+                if(matrix[i][j] == -1 && flag == true) {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+        
+    }
+};
