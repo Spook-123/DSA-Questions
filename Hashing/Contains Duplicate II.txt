@@ -1,0 +1,18 @@
+class Solution {
+public:
+    bool containsNearbyDuplicate(vector<int>& nums, int k) {
+        
+        unordered_map<int,int> map; // nums[i],index
+        // Traverse through array and find the difference
+        for(int i=0;i<nums.size();i++) {
+            int curr = nums[i];
+            
+            if( (map.find(curr) != map.end()) && i-map[curr] <= k) {
+                return true;
+            }
+            map[curr] = i;
+        }
+        return false;
+        
+    }
+};
