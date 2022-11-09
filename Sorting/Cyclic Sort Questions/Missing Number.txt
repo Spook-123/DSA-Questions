@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int missingNumber(vector<int>& nums) {
+        
+        int n = nums.size();
+        for(int i=0;i<n;) {
+            // Compute the correct index
+            int correctIndex = nums[i];
+            // check the bounds and correct index to swap it
+            if(nums[i] < n && nums[i] != nums[correctIndex]) {
+                swap(nums[i],nums[correctIndex]);
+            }
+            // ignore it
+            else {
+                i++;
+            }
+        }
+        // find the missing element
+        for(int i=0;i<n;i++) {
+            if(nums[i] != i) {
+                return i;
+            }
+        }
+        // last element
+        return n;
+        
+        
+    }
+};
