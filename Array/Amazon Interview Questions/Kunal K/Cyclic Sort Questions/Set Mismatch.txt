@@ -1,0 +1,28 @@
+class Solution {
+public:
+    vector<int> findErrorNums(vector<int>& nums) {
+        
+        int n = nums.size();
+        for(int i=0;i<n;) {
+            // Cyclic Sort
+            int correctIndex = nums[i]-1;
+            if(nums[i] != nums[correctIndex]) {
+                swap(nums[i],nums[correctIndex]);
+            }
+            else {
+                i++;
+            }
+        }
+        vector<int> ans;
+        for(int i=0;i<n;i++) {
+            // if element is not at the correct position then "nums[i]" -> duplicate  and "i+1" -> missing 
+            if(nums[i] != i+1) {
+                ans.push_back(nums[i]);
+                ans.push_back(i+1);
+                
+            } 
+        }
+        return ans;
+        
+    }
+};
