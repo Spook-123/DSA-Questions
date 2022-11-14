@@ -1,0 +1,28 @@
+class Solution {
+public:
+    vector<int> sortArrayByParityII(vector<int>& nums) {
+        
+        int n = nums.size();
+        // even index
+        int i = 0;
+        // odd index
+        int j = 1;
+        
+        while(i < n && j < n) {
+            // Increment the index until "i th" even 
+            while(i < n && nums[i]%2 == 0) {
+                i+=2;
+            }
+            // Increment the index until "i th" odd
+            while(j < n && nums[j]%2 != 0) {
+                j+=2;
+            }
+            // Elements are misplaced then swap them
+            if(i < n && j < n) {
+                swap(nums[i],nums[j]);
+            }
+        }
+        return nums;
+        
+    }
+};
