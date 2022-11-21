@@ -1,0 +1,35 @@
+class Solution {
+public:
+    vector<int> answerQueries(vector<int>& nums, vector<int>& queries) {
+        
+        
+        int n = nums.size();
+        int m = queries.size();
+        vector<int> preSum;
+        int sum = 0;
+        // Sort the vector
+        sort(nums.begin(),nums.end());
+        // Calculate the presum and store it
+        for(int i=0;i<n;i++) {
+            sum += nums[i];
+            preSum.push_back(sum);
+        }
+        vector<int> ans(m);
+        // Traverse the queries array
+        for(int i=0;i<m;i++) {
+            for(int j=0;j<n;j++) {
+                // check if preSum array of "j"th index is less than or equal to queries element
+                if(preSum[j] <= queries[i]) {
+                    ans[i] = j+1;
+                }
+                
+                else {
+                    break;
+                }
+            }
+        }
+        
+        return ans;
+        
+    }
+};
