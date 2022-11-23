@@ -1,0 +1,89 @@
+/**
+ * // This is the MountainArray's API interface.
+ * // You should not implement it, or speculate about its implementation
+ * class MountainArray {
+ *   public:
+ *     int get(int index);
+ *     int length();
+ * };
+ */
+
+class Solution {
+public:
+    // Binary Seach for Ascending Part
+    int binarySearchAscending(MountainArray &mountainArr,int target,int start,int end) {
+        while(start <= end) {
+            int mid = start + (end-start)/2;
+            
+            if(mountainArr.get(mid) == target) {
+                return mid;
+            }
+            else if(mountainArr.get(mid) > target) {
+                end = mid-1;
+            }
+            else {
+                start = mid+1;
+            }
+        }
+        return -1;
+        
+    }
+    // Binary Seach for Descending Part
+    int binarySearchDescending(MountainArray &mountainArr,int target,int start,int end) {
+        
+        while(start <= end) {
+            int mid = start + (end-start)/2;
+            
+            if(mountainArr.get(mid) == target) {
+                return mid;
+            }
+            else if(mountainArr.get(mid) > target) {
+                start = mid+1;
+            }
+            else {
+                end = mid-1;
+            }
+        }
+        return -1;
+    }
+    // Finding the peak element
+    int peakElement(MountainArray &mountainArr,int target) {
+        int start = 0;
+        int end = mountainArr.length()-1;
+        
+        while(start < end) {
+            int mid = start + (end-start)/2;
+            
+            if(mountainArr.get(mid) > mountainArr.get(mid+1)) {
+                end = mid;
+            }
+            else {
+                start = mid+1;
+            }
+        }
+        return start;
+    }
+    int findInMountainArray(int target, MountainArray &mountainArr) {
+        
+        int peakIndex = peakElement(mountainArr,target);
+        int start = 0;
+        int end = mountainArr.length()-1;
+        int ans = -1;
+        // if target is peak element
+        if(target == mountainArr.get(peakIndex)) {
+            return peakIndex;
+        }
+        // if target is less than peak element then search in left half
+        if(target < mountainArr.get(peakIndex)) {
+            ans = binarySearchAscending(mountainArr,target,start,peakIndex-1);
+        }
+        // if not found then 
+        if(ans != -1) {
+            return ans;
+        }
+        // Search in right half
+        return binarySearchDescending(mountainArr,target,peakIndex+1,end);
+        
+        
+    }
+};
